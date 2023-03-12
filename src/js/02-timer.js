@@ -4,23 +4,44 @@
 import flatpickr from 'flatpickr';
 import 'flatpickr/dist/flatpickr.min.css';
 
-let timer = null;
-
 const datePicker = document.querySelector('#datetime-picker');
 const startBtn = document.querySelector('[data-start]');
+
+const daysDisplay = document.querySelector('[data-days]');
+const hoursDisplay = document.querySelector('[data-hours]');
+const minutesDisplay = document.querySelector('[data-minutes]');
+const secondsDisplay = document.querySelector('[data-seconds]');
+
+let timer = null;
+startBtn.disabled = true;
 
 const options = {
   enableTime: true,
   time_24hr: true,
   defaultDate: new Date(),
   minuteIncrement: 1,
+  //Setting alert and button options
   onClose(selectedDates) {
-    console.log(selectedDates[0]);
+    if (selectedDates[0] <= Date.now()) {
+      startBtn.disabled = true;
+      window.alert('Please choose a date in the future');
+    } else {
+      startBtn.disabled = false;
+    }
   },
 };
 
 flatpickr(datePicker, options);
 
+//Activate counting by click
+startBtn.addEventListener('click', onStartBtn);
+
+function onStartBtn() {
+  startBtn.disabled = true;
+  timer = setInterval(showingTime, 1000);
+}
+
+// Time counting
 function convertMs(ms) {
   // Number of milliseconds per unit of time
   const second = 1000;
@@ -38,4 +59,10 @@ function convertMs(ms) {
   const seconds = Math.floor((((ms % day) % hour) % minute) / second);
 
   return { days, hours, minutes, seconds };
+}
+
+// Time formating
+function addLeadingZero(value) {
+  const strValue = String(value);
+  return strValue.padStart(2, '0');
 }
