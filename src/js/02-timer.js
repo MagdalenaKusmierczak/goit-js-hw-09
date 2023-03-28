@@ -24,6 +24,7 @@ const options = {
   onClose(selectedDates) {
     if (selectedDates[0] <= Date.now()) {
       startBtn.disabled = true;
+      clearInterval(timer);
       window.alert('Please choose a date in the future');
     } else {
       startBtn.disabled = false;
@@ -37,6 +38,7 @@ flatpickr(datePicker, options);
 startBtn.addEventListener('click', onStartBtn);
 
 function onStartBtn() {
+  clearInterval(timer);
   startBtn.disabled = true;
   timer = setInterval(showingTime, 1000);
 }
@@ -65,4 +67,56 @@ function convertMs(ms) {
 function addLeadingZero(value) {
   const strValue = String(value);
   return strValue.padStart(2, '0');
+}
+//Difference between current date and choosen date
+function getDateDifference() {
+  const timePicker = new Date(datePicker.value);
+  const currentDate = new Date(Date.now());
+  const dateDifference = timePicker - currentDate;
+  return dateDifference;
+}
+
+function showingTime() {
+  const dateDifference = getDateDifference();
+  const objectTime = convertMs(dateDifference);
+
+  setTime(
+    objectTime.days,
+    objectTime.hours,
+    objectTime.minutes,
+    objectTime.seconds
+  );
+
+  if (
+    objectTime.days === 0 &&
+    objectTime.hours === 0 &&
+    objectTime.minutes === 0 &&
+    objectTime.seconds === 0
+  ) {
+    clearInterval(timer);
+    return;
+  }
+}
+
+function setDays(value) {
+  daysDisplay.textContent = addLeadingZero(value);
+}
+
+function setHours(value) {
+  hoursDisplay.textContent = addLeadingZero(value);
+}
+
+function setMinutes(value) {
+  minutesDisplay.textContent = addLeadingZero(value);
+}
+
+function setSeconds(value) {
+  secondsDisplay.textContent = addLeadingZero(value);
+}
+
+function setTime(days, hours, minutes, seconds) {
+  setDays(days);
+  setHours(hours);
+  setMinutes(minutes);
+  setSeconds(seconds);
 }
