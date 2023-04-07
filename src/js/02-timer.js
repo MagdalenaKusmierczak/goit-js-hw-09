@@ -1,8 +1,10 @@
-// Timer that counts time to chosen date.
+// Aplication "Timer that counts time to chosen date".
 
 // Library import
 import flatpickr from 'flatpickr';
 import 'flatpickr/dist/flatpickr.min.css';
+
+import Notiflix from 'notiflix';
 
 const datePicker = document.querySelector('#datetime-picker');
 const startBtn = document.querySelector('[data-start]');
@@ -15,6 +17,15 @@ const secondsDisplay = document.querySelector('[data-seconds]');
 let timer = null;
 startBtn.disabled = true;
 
+//Notiflix window options
+Notiflix.Notify.init({
+  width: '280px',
+  position: 'right-top',
+  distance: '56px',
+  opacity: 1,
+});
+
+//Timer options
 const options = {
   enableTime: true,
   time_24hr: true,
@@ -25,7 +36,8 @@ const options = {
     if (selectedDates[0] <= Date.now()) {
       startBtn.disabled = true;
       clearInterval(timer);
-      window.alert('Please choose a date in the future');
+      Notiflix.Notify.failure('Please choose a date in the future');
+      // window.alert('Please choose a date in the future');
     } else {
       startBtn.disabled = false;
     }
