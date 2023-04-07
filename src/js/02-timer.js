@@ -6,9 +6,11 @@ import 'flatpickr/dist/flatpickr.min.css';
 
 import Notiflix from 'notiflix';
 
+//Timer selectors
 const datePicker = document.querySelector('#datetime-picker');
 const startBtn = document.querySelector('[data-start]');
 
+//Display selectors
 const daysDisplay = document.querySelector('[data-days]');
 const hoursDisplay = document.querySelector('[data-hours]');
 const minutesDisplay = document.querySelector('[data-minutes]');
