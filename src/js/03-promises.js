@@ -13,9 +13,9 @@ Notiflix.Notify.init({
 //
 //Form elements
 const form = document.querySelector('.form');
-const delayImput = document.querySelector('input[name="delay"]');
-const stepImput = document.querySelector('input[name="step"]');
-const amountImput = document.querySelector('input[name="amount"]');
+const delayInput = document.querySelector('input[name="delay"]');
+const stepInput = document.querySelector('input[name="step"]');
+const amountInput = document.querySelector('input[name="amount"]');
 //
 //Promise function
 function createPromise(position, delay) {
@@ -40,13 +40,13 @@ function onSubmit(event) {
   event.preventDefault();
   //
   //Values of elements after submit
-  const delayValue = Number(delayImput.value);
-  const stepValue = Number(stepImput.value);
-  const amountValue = Number(amountImput.value);
+  const delayValue = Number(delayInput.value);
+  const stepValue = Number(stepInput.value);
+  const amountValue = Number(amountInput.value);
   // Calculating total delay
   let totalDelay = 0;
   for (let i = 1; i <= amountValue; i += 1) {
-    totalDelay = stepValue + delayValue * (i - 1);
+    totalDelay = delayValue + stepValue * (i - 1);
     //Notifications for promises
     createPromise(i, totalDelay)
       .then(({ position, delay }) => {
