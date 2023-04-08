@@ -6,11 +6,11 @@ import 'flatpickr/dist/flatpickr.min.css';
 
 import Notiflix from 'notiflix';
 
-//Timer selectors
+//Timer elements
 const datePicker = document.querySelector('#datetime-picker');
 const startBtn = document.querySelector('[data-start]');
 
-//Display selectors
+//Display elements
 const daysDisplay = document.querySelector('[data-days]');
 const hoursDisplay = document.querySelector('[data-hours]');
 const minutesDisplay = document.querySelector('[data-minutes]');
@@ -21,9 +21,9 @@ startBtn.disabled = true;
 
 //Notiflix window options
 Notiflix.Notify.init({
-  width: '280px',
+  width: '300px',
   position: 'right-top',
-  distance: '56px',
+  distance: '40px',
   opacity: 1,
 });
 
