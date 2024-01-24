@@ -94,12 +94,7 @@ function showingTime() {
   const dateDifference = getDateDifference();
   const objectTime = convertMs(dateDifference);
 
-  setTime(
-    objectTime.days,
-    objectTime.hours,
-    objectTime.minutes,
-    objectTime.seconds
-  );
+  setTime(...Object.values(objectTime));
 
   if (
     objectTime.days === 0 &&
