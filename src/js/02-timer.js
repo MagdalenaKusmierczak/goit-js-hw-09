@@ -93,15 +93,11 @@ function getDateDifference() {
 function showingTime() {
   const dateDifference = getDateDifference();
   const objectTime = convertMs(dateDifference);
+  const isZero = value => value === 0;
+  const time = [...Object.values(objectTime)];
+  setTime(...time);
 
-  setTime(...Object.values(objectTime));
-
-  if (
-    objectTime.days === 0 &&
-    objectTime.hours === 0 &&
-    objectTime.minutes === 0 &&
-    objectTime.seconds === 0
-  ) {
+  if (time.every(isZero)) {
     clearInterval(timer);
     return;
   }
